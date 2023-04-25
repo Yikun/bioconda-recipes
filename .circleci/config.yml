@@ -4,7 +4,7 @@ version: 2.1
 executors:
   osx-arm64:
     macos:
-      xcode: 14.2 # indicate your selected version of Xcode
+      xcode: "14.2.0"
     resource_class: macos.m1.large.gen1
   linux-aarch64:
     machine:
