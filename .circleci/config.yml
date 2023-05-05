@@ -43,7 +43,9 @@ jobs: # a basic unit of work in a run
       - run:
           name: Build and test
           command: |
-            /opt/mambaforge/bin/mamba activate bioconda
+            source /opt/mambaforge/etc/profile.d/conda.sh
+            source /opt/mambaforge/etc/profile.d/mamba.sh
+            mamba activate bioconda
             bioconda-utils build recipes config.yml --git-range origin/master HEAD
       - run:
           name: Prepare artifacts
