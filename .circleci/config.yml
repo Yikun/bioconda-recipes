@@ -43,7 +43,7 @@ jobs: # a basic unit of work in a run
       - run:
           name: Build and test
           command: |
-            conda activate bioconda
+            # conda activate bioconda
             bioconda-utils build recipes config.yml --git-range origin/master HEAD
       - run:
           name: Prepare artifacts
