@@ -22,7 +22,7 @@ jobs: # a basic unit of work in a run
 
       - run:
           name: Fetch bioconda install script
-          command: wget https://raw.githubusercontent.com/bioconda/bioconda-common/master/install-and-set-up-conda.sh
+          command: wget https://raw.githubusercontent.com/Yikun/bioconda-common/patch-2/install-and-set-up-conda.sh
 
       - restore_cache:
           keys:
@@ -31,8 +31,8 @@ jobs: # a basic unit of work in a run
       - run:
           name: Install bioconda-utils
           command: |
-            # sudo mkdir -p /opt/mambaforge
-            # sudo chown -R $USER /opt/mambaforge
+            sudo mkdir -p /opt/mambaforge
+            sudo chown -R $USER /opt/mambaforge
             bash install-and-set-up-conda.sh
 
       - save_cache:
