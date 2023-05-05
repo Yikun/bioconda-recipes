@@ -89,7 +89,7 @@ jobs: # a basic unit of work in a run
       - run:
           name: Build and push
           command: |
-            mamba activate bioconda-utils
+            /opt/mambaforge/bin/mamba  activate bioconda-utils
             # TODO we need to update bioconda-utils with support for retrieving circleci artifacts from above
             bioconda-utils handle-merged-pr recipes config.yml \
               --repo bioconda/bioconda-recipes \
