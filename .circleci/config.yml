@@ -95,8 +95,6 @@ jobs: # a basic unit of work in a run
             source /opt/mambaforge/etc/profile.d/conda.sh
             source /opt/mambaforge/etc/profile.d/mamba.sh
             mamba activate bioconda
-            bioconda-utils build recipes config.yml --git-range origin/master HEAD
-            /opt/mambaforge/bin/mamba  activate bioconda-utils
             # TODO we need to update bioconda-utils with support for retrieving circleci artifacts from above
             bioconda-utils handle-merged-pr recipes config.yml \
               --repo bioconda/bioconda-recipes \
