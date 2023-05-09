@@ -18,7 +18,11 @@ jobs: # a basic unit of work in a run
         type: executor
     executor: << parameters.os >>
     steps:
-      - run: git clone -b "$CIRCLE_BRANCH" "$CIRCLE_REPOSITORY_URL"
+      - run:
+          name: Fetch bioconda install script
+          command: |
+            git clone -b "$CIRCLE_BRANCH" "$CIRCLE_REPOSITORY_URL"
+            cd bioconda-recipes
 
       - run:
           name: Fetch bioconda install script
