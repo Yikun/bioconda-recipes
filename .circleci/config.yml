@@ -23,8 +23,6 @@ jobs: # a basic unit of work in a run
       - run:
           name: Fetch bioconda install script
           command: |
-            git branch -vva
-            git config -l
             wget https://raw.githubusercontent.com/bioconda/bioconda-common/master/install-and-set-up-conda.sh
 
       - restore_cache:
@@ -49,7 +47,7 @@ jobs: # a basic unit of work in a run
             source /opt/mambaforge/etc/profile.d/conda.sh
             source /opt/mambaforge/etc/profile.d/mamba.sh
             mamba activate bioconda
-            bioconda-utils build recipes config.yml --git-range origin/master HEAD
+            bioconda-utils build recipes config.yml --git-range master HEAD
       - run:
           name: Prepare artifacts
           command: |
@@ -83,8 +81,8 @@ jobs: # a basic unit of work in a run
       - run:
           name: Install bioconda-utils
           command: |
-            sudo mkdir -p /opt/miniconda
-            chown -R $USER:$USER /opt/miniconda
+            sudo mkdir -p /opt
+            sudo chown -R $USER /opt
             bash install-and-set-up-conda.sh
       - save_cache:
           key: bioconda-utils-{{ arch }}-{{ checksum "install-and-set-up-conda.sh" }}
@@ -94,6 +92,10 @@ jobs: # a basic unit of work in a run
       - run:
           name: Build and push
           command: |
+            source /opt/mambaforge/etc/profile.d/conda.sh
+            source /opt/mambaforge/etc/profile.d/mamba.sh
+            mamba activate bioconda
+            bioconda-utils build recipes config.yml --git-range origin/master HEAD
             /opt/mambaforge/bin/mamba  activate bioconda-utils
             # TODO we need to update bioconda-utils with support for retrieving circleci artifacts from above
             bioconda-utils handle-merged-pr recipes config.yml \
